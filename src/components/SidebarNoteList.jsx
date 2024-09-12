@@ -1,7 +1,12 @@
-import dayjs from 'dayjs'
+import SidebarNoteItem from './SidebarNoteItem'
+import { getAllNotes } from '@/lib/redis'
 
-export default async function NoteList({ notes }) {
+export default async function NoteList() {
+    // this sleep is a test code for NoteListSkeleton.jsx
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+    await sleep(5000)
 
+    const notes = await getAllNotes()
     const arr = Object.entries(notes);
 
     if (arr.length == 0) {
@@ -12,12 +17,8 @@ export default async function NoteList({ notes }) {
 
     return <ul className="notes-list">
         {arr.map(([noteId, note]) => {
-            const { title, updateTime } = JSON.parse(note);
             return <li key={noteId}>
-                <header className="sidebar-note-header">
-                    <strong>{title}</strong>
-                    <small>{dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')}</small>
-                </header>
+                <SidebarNoteItem noteId={noteId} note={JSON.parse(note)} />
             </li>
         })}
     </ul>
