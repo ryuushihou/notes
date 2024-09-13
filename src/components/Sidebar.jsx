@@ -10,15 +10,15 @@ export default async function Sidebar() {
             <section className="col sidebar">
                 <Link href={'/'} className="link--unstyled">
                     <section className="sidebar-header">
-                        <img
+                        {/* <img
                             className="logo"
                             src="/logo.svg"
                             width="22px"
                             height="20px"
                             alt=""
                             role="presentation"
-                        />
-                        <strong>React Notes</strong>
+                        /> */}
+                        <strong>My Notes</strong>
                     </section>
                 </Link>
                 <section className="sidebar-menu" role="menubar">
