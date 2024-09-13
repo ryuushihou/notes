@@ -4,7 +4,7 @@ import { getAllNotes } from '@/lib/redis'
 export default async function NoteList() {
     // this sleep is a test code for NoteListSkeleton.jsx
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-    await sleep(5000)
+    await sleep(1000)
 
     const notes = await getAllNotes()
     const arr = Object.entries(notes);
