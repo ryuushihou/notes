@@ -1,25 +1,24 @@
-import SidebarNoteItem from './SidebarNoteItem'
-import { getAllNotes } from '@/lib/redis'
+import SidebarNoteListFilter from '@/components/SidebarNoteListFilter';
+import SidebarNoteItem from '@/components/SidebarNoteItem';
+import { getAllNotes } from '@/lib/redis';
+import { sleep } from '@/lib/utils';
 
 export default async function NoteList() {
-    // this sleep is a test code for NoteListSkeleton.jsx
-    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
-    await sleep(1000)
 
+    await sleep(2000)
     const notes = await getAllNotes()
-    const arr = Object.entries(notes);
 
-    if (arr.length == 0) {
+    if (Object.entries(notes).length == 0) {
         return <div className="notes-empty">
             {'No notes created yet!'}
         </div>
     }
 
-    return <ul className="notes-list">
-        {arr.map(([noteId, note]) => {
-            return <li key={noteId}>
-                <SidebarNoteItem noteId={noteId} note={JSON.parse(note)} />
-            </li>
-        })}
-    </ul>
+    return (
+        <SidebarNoteListFilter>
+            {Object.entries(notes).map(([noteId, note]) => {
+                return <SidebarNoteItem noteId={noteId} note={JSON.parse(note)} />
+            })}
+        </SidebarNoteListFilter>
+    )
 }
