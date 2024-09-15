@@ -1,7 +1,14 @@
 import NoteEditor from '@/components/NoteEditor'
 import { getNote } from '@/lib/redis';
 import { sleep } from '@/lib/utils';
+// import { auth } from "auth"
+
 export default async function EditPage({ params }) {
+    // 没有middleware的时候在这里添加auth
+    // const session = await auth()
+    // if (!session?.user) {
+    //     return <div>请先登录</div>
+    // }
     const noteId = params.id;
     const note = await getNote(noteId)
 

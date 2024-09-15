@@ -57,4 +57,25 @@ export async function delNote(uuid) {
     return await client.hDel("notes", uuid);
 }
 
+export async function addUser(username, password) {
+    await connectRedis();
+    await client.hSet("users", username, password);
+    return {
+        name: username,
+        username
+    }
+}
+
+export async function getUser(username, password) {
+    await connectRedis();
+    const passwordFromDB = await client.hGet("users", username);
+    console.log("getUser - passwordFromDB:", passwordFromDB);
+    if (!passwordFromDB) return 0;
+    if (passwordFromDB !== password) return 1;
+    return {
+        name: username,
+        username
+    }
+}
+
 export default client;
