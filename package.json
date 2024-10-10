@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.19.1",
     "dayjs": "^1.11.13",
     "ioredis": "^5.4.1",
     "marked": "^14.1.2",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "eslint": "^8",
-    "eslint-config-next": "14.2.9"
+    "eslint-config-next": "14.2.9",
+    "prisma": "^5.19.1"
   }
 }
